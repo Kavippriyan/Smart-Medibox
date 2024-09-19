@@ -82,20 +82,6 @@ lib_deps =
 
 ![NodeRed-Flow](./../NodeRed-Flow/Flow1.png)
 
-*	`defmedConfig()` node includes the default parameters for preset light control parameters. In it's "On Start" tab, you can adjust them accordingly.
-*	`Default Starting Parameters Trigger` includes Default values for above parameters on startup. 
-
-*	Medibox sends Temperature and Light Data to the Dashboard through broker and this MQTT requests are generated only when those parameters get a considerable change in their value.
-
-*	On the otherhand, the Dashboard sends the required motor angle to the Medibox. This is also done only when there is a considerable change pending.
-
-*	Sensivity of gauges, Plots, and even the change in parameters needed for triggering MQTT Requests can be configured easily.
-	```cpp
-		#define EPSILON 0.03
-		#define TEMPSILON 0.01
-	```
-	*	`EPSILON` and `TEMPSILON` is the minimum difference needed in previous and current values of the readings of two LDRs and of the Temparature Sensor respectively to Medibox to generate and send an MQTT Request. 
-
 
 ## ESP32 Default Pin Map
 
@@ -116,40 +102,25 @@ lib_deps =
 
 # Calculations
 
-## Calculating the Light Intensity
+## Light Intensity Calculation in Smart Medibox
+*	In this project, we use two LDRs (Light Dependent Resistors) to measure light intensity from two directions. Based on the intensity values, the servo motor adjusts a sliding window to regulate light exposure.
 
-*	Two ways of calculating light intensity is available.
-	*	Linear Mapping
-	*	Non-Linear Mapping (High Accuracy - Default)
-
- >[!NOTE]<br>
-> Calculating the Light Intensity from a LDR input more accurately needs to be done per LDR basis and uses curve fitting to approximate unique function that approximates the variation of voltage of LDR. Despite being less accurate we can assume that the Non-Linear mapping will mostly be accurate enough for this application.
-
-
-You may configure following values in `./include/constants.h`. Defaults values are as follows.
-```cpp
-#define LINEAR_MAPPING 0
-#define FINITE_INFINITY 10000
-```
-*	If you want to use the linear mapping, set `LINEAR_MAPPING` to 1. Otherwise set it to 0.
-*	Since the values are capped (Values are finalized between 0 and 1 for easy interpretability.)to a range within 0 and 1 and the luminance can be infinitely large, 
-
-	*	a finite number is specified as infinity(`FINITE_INFINITY`) so that all numbers above that are considered as 1. 
-	*	**If you are using linear mapping, the maximum value recommended for FINITE_INFINITY is 4096.0** and otherwise it is 10000 by default, but will have to change according to the LDR used.
-	*	Anything above that makes readings shrinked to a narrow range.
-
-*	Since project uses two 5mm LDRs for this purpose, it is not straight forward to calculate the light insentity from the sensor reading(Analog voltage). If there is no need for higher precision, the linear mapping is the way to go. The Non-Linear mapping involves configuration of some more parameters in `./include/constants.h`.
-
+Process:
+*	Reading LDR Values: The LDRs are connected to analog pins of the ESP32, and we read their values using analogRead(). Each LDR gives a voltage that corresponds to the intensity of light falling on it.
 	```cpp
-	#define GAMMA 0.7
-	#define RL10 50
-	#define RESISTOR 10000
-	#define VCC 3.3
+	float leftLDRValue = analogRead(LEFT_LDR_PIN) * 1.00;
+	float rightLDRValue = analogRead(RIGHT_LDR_PIN) * 1.00;
 	```
-	*	`GAMMA` - Gamma Value of the LDRs being used.
-	*	`RL10` - RL10 value of the LDRs being used.
-	*	`RESISTOR` - Resistance of the used Resistors in series with LDRs.
-	*	`VCC` - Input Voltage of the Resistor-LDR Series circuit.
+  
+*	Calculating Intensity: The raw LDR values are converted to intensity values (I_left and I_right) using a formula. The formula normalizes the readings between 0 and 1, where 0 is the lowest intensity and 1 is the highest.
+
+*	Identifying the Higher Intensity: We compare the two intensities and select the higher one (I_max). The source of the higher intensity is identified (sourceLDR).
+  
+*	Publishing Data: The highest intensity and the source are published to the MQTT broker for remote monitoring.
+  
+*	Adjusting Window: The calculated intensity (I_max) is used to adjust the angle of the servo motor, which controls the sliding window to optimize the light exposure.	
+
+	
 
 ## Calculating the Motor Angle
 
