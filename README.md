@@ -24,7 +24,7 @@ If the components change, you may have to change some parameters accordingly.
 
 
 
-*   This was developed using Platform IO with Arduino Framework. (You can use the code in branch [`Wokwi`]](https://github.com/Kavippriyan/Smart-Medibox), if you are looking forward for a simulation. But note that it lack some newly added features including Node-Red connectivity.)
+*   This was developed using Platform IO with Arduino Framework. (You can use the code in branch [`Wokwi`](https://github.com/Kavippriyan/Smart-Medibox), if you are looking forward for a simulation. But note that it lack some newly added features including Node-Red connectivity.)
 
 # Getting Started
 
