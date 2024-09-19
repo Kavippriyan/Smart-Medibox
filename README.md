@@ -22,22 +22,6 @@ Smart medibox is a smart device that,
 If the components change, you may have to change some parameters accordingly. 
 
 
-## platform.ini
-
-```ini
-[env:esp32doit-devkit-v1]
-platform = espressif32
-board = esp32doit-devkit-v1
-framework = arduino
-lib_deps = 
-	adafruit/Adafruit GFX Library@^1.11.9
-	adafruit/Adafruit SSD1306@^2.5.9
-	adafruit/DHT sensor library@^1.4.6
-	roboticsbrno/ServoESP32@1.0.3
-	knolleary/PubSubClient@^2.8
-	bblanchon/ArduinoJson@^7.0.4
-```
-
 
 *   This was developed using Platform IO with Arduino Framework. (You can use the code in branch [`Wokwi`]](https://github.com/Kavippriyan/Smart-Medibox), if you are looking forward for a simulation. But note that it lack some newly added features including Node-Red connectivity.)
 
