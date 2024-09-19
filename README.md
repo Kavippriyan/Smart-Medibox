@@ -97,4 +97,81 @@ lib_deps =
 	*	`EPSILON` and `TEMPSILON` is the minimum difference needed in previous and current values of the readings of two LDRs and of the Temparature Sensor respectively to Medibox to generate and send an MQTT Request. 
 
 
+## ESP32 Default Pin Map
+
+| Pin | Constant |  Device |
+|---|---|---|
+|  5 | BUZZER |Buzzer that rings on Alarms |
+|  15 | LED_1 | LED which lights up on Alarms |
+|  34 | PB_CANCEL | Push button input which used for cancellations and to go back |
+|  25 | PB_OK | Push button input which is used for confirmations and entering the menu|
+|  26 | PB_UP |  Push Button input which is used to go up in menu |
+|  35 | PB_DOWN |  Push Button input which is used to go down in menu|
+|  4 | DHT_PIN |  DHT11 Temperature & Humidity Sensor input|
+|  36, 39 | LDR_1, LDR_2 | Input pins of the two LDRs.|
+| 33 | SERVO | PWM Output for the Servo motor |
+
+*	These are defined in the same `constants.h` file mentioned above.
+
+
+# Calculations
+
+## Calculating the Light Intensity
+
+*	Two ways of calculating light intensity is available.
+	*	Linear Mapping
+	*	Non-Linear Mapping (High Accuracy - Default)
+
+ >[!NOTE]<br>
+> Calculating the Light Intensity from a LDR input more accurately needs to be done per LDR basis and uses curve fitting to approximate unique function that approximates the variation of voltage of LDR. Despite being less accurate we can assume that the Non-Linear mapping will mostly be accurate enough for this application.
+
+
+You may configure following values in `./include/constants.h`. Defaults values are as follows.
+```cpp
+#define LINEAR_MAPPING 0
+#define FINITE_INFINITY 10000
+```
+*	If you want to use the linear mapping, set `LINEAR_MAPPING` to 1. Otherwise set it to 0.
+*	Since the values are capped (Values are finalized between 0 and 1 for easy interpretability.)to a range within 0 and 1 and the luminance can be infinitely large, 
+
+	*	a finite number is specified as infinity(`FINITE_INFINITY`) so that all numbers above that are considered as 1. 
+	*	**If you are using linear mapping, the maximum value recommended for FINITE_INFINITY is 4096.0** and otherwise it is 10000 by default, but will have to change according to the LDR used.
+	*	Anything above that makes readings shrinked to a narrow range.
+
+*	Since project uses two 5mm LDRs for this purpose, it is not straight forward to calculate the light insentity from the sensor reading(Analog voltage). If there is no need for higher precision, the linear mapping is the way to go. The Non-Linear mapping involves configuration of some more parameters in `./include/constants.h`.
+
+	```cpp
+	#define GAMMA 0.7
+	#define RL10 50
+	#define RESISTOR 10000
+	#define VCC 3.3
+	```
+	*	`GAMMA` - Gamma Value of the LDRs being used.
+	*	`RL10` - RL10 value of the LDRs being used.
+	*	`RESISTOR` - Resistance of the used Resistors in series with LDRs.
+	*	`VCC` - Input Voltage of the Resistor-LDR Series circuit.
+
+## Calculating the Motor Angle
+
+$$θ = \min\{\theta_{\text{offset}} \cdot D + (180 - \theta_{\text{offset}}) \cdot I \cdot \gamma, 180\}$$
+
+| Symbol | Description |
+|---|---|
+| $$θ$$ | Represents the output angle. Motor rotates to this position. |
+| $$\theta_{\text{offset}}$$| Represents the minimum angle that the morot will be in. This is a constant value that influences the output angle. |
+| $$D$$ | Coificient of effect of LDR which changes the angle of rotation according the fact that which LDR records higher reading. |
+| $$I$$ |Maximum light intensity of the two LDRs. |
+| $$\gamma$$ | Controlling factor. This value scales the influence of variable "I" on the output angle. |
+
+
+## Node-Red Dashboard
+
+<img width="2406" alt="Gallery Image" src="./light.png"> |  <img width="2406" alt="Gallery Image" src="./temp.png">
+:-------------------------:|:-------------------------:
+
+# About
+
+This project was first developed for the `EN2853 - Embedded Systems & Applications` module in Semester 4, University of Moratuwa, Department of Electrical Engineering.
+[go to the top](#Smart-Medibox)
+
 
