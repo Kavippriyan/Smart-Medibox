@@ -39,4 +39,4 @@ lib_deps =
 ```
 
 
-*   This was developed using Platform IO with Arduino Framework. (You can use the code in branch [`Wokwi`]([https://github.com/chathura-de-silva/Smart-Medibox/tree/Wokwi](https://github.com/Kavippriyan/Smart-Medibox)), if you are looking forward for a simulation. But note that it lack some newly added features including Node-Red connectivity.)
+*   This was developed using Platform IO with Arduino Framework. (You can use the code in branch [`Wokwi`]](https://github.com/Kavippriyan/Smart-Medibox), if you are looking forward for a simulation. But note that it lack some newly added features including Node-Red connectivity.)
