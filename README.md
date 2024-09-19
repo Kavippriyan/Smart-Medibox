@@ -121,10 +121,10 @@ $$θ = \min\{\theta_{\text{offset}} \cdot D + (180 - \theta_{\text{offset}}) \cd
 | $$\gamma$$ | Controlling factor. This value scales the influence of variable "I" on the output angle. |
 
 
-## Node-Red Dashboard
+## NodeRed Dashboard
 
-(Photos/Dashboard.png)
-:-------------------------:|:-------------------------:
+![NodeRed Dashboard](Photos/Dashboard.png)
+
 
 # About
 
