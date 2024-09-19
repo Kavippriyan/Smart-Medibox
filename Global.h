@@ -45,6 +45,7 @@ float I_max = 0.0;
 String sourceLDR = "";
 
 bool isScheduledON = false;
+unsigned long scheduledOnTime;
 
 // D value when LDR gives max intensity
 const float D_left = 1.5; 
