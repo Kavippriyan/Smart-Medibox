@@ -73,15 +73,15 @@ If the components change, you may have to change some parameters accordingly.
 
 | Pin | Constant |  Device |
 |---|---|---|
-|  5 | BUZZER |Buzzer that rings on Alarms |
+|  18 | BUZZER |Buzzer that rings on Alarms |
 |  15 | LED_1 | LED which lights up on Alarms |
 |  34 | PB_CANCEL | Push button input which used for cancellations and to go back |
-|  25 | PB_OK | Push button input which is used for confirmations and entering the menu|
-|  26 | PB_UP |  Push Button input which is used to go up in menu |
+|  32 | PB_OK | Push button input which is used for confirmations and entering the menu|
+|  33 | PB_UP |  Push Button input which is used to go up in menu |
 |  35 | PB_DOWN |  Push Button input which is used to go down in menu|
-|  4 | DHT_PIN |  DHT11 Temperature & Humidity Sensor input|
-|  36, 39 | LDR_1, LDR_2 | Input pins of the two LDRs.|
-| 33 | SERVO | PWM Output for the Servo motor |
+|  12 | DHTPIN |  DHT11 Temperature & Humidity Sensor input|
+|  34, 35 | LDR_1, LDR_2 | Input pins of the two LDRs.|
+|  13 | SERVO | PWM Output for the Servo motor |
 
 *	These are defined in the same `constants.h` file mentioned above.
 
