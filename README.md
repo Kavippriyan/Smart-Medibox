@@ -1,4 +1,4 @@
-![Banner](./repoBanner.png)
+![Banner](Photos/Diagram1.png)
 
 
 # Smart Medibox
