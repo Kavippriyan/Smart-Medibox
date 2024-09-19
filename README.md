@@ -1,7 +1,8 @@
-![Banner](Photos/Diagram1.png)
-
-
 # Smart Medibox
+
+![Banner](Photos/Diagram1.png)
+![Banner](Photos/Diagram2.png)
+
 
 Smart medibox is a smart device that,
 1. Remind the user to take medicine at time through alarms.
@@ -64,7 +65,8 @@ If the components change, you may have to change some parameters accordingly.
 
 ## Node-Red Dashboard Flow
 
-![NodeRed-Flow](./../NodeRed-Flow/Flow1.png)
+![NodeRed-Flow](Photos/Flow.png)
+![NodeRed-Flow](Photos/Flow1.png)
 
 
 ## ESP32 Default Pin Map
@@ -121,7 +123,7 @@ $$θ = \min\{\theta_{\text{offset}} \cdot D + (180 - \theta_{\text{offset}}) \cd
 
 ## Node-Red Dashboard
 
-<img width="2406" alt="Gallery Image" src="./light.png"> |  <img width="2406" alt="Gallery Image" src="./temp.png">
+(Photos/Dashboard.png)
 :-------------------------:|:-------------------------:
 
 # About
