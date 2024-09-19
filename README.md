@@ -80,7 +80,7 @@ lib_deps =
 
 ## Node-Red Dashboard Flow
 
-![Node-Red Flow](./../NodeRed-Flow/Flow1.png)
+![NodeRed-Flow](./../NodeRed-Flow/Flow1.png)
 
 *	`defmedConfig()` node includes the default parameters for preset light control parameters. In it's "On Start" tab, you can adjust them accordingly.
 *	`Default Starting Parameters Trigger` includes Default values for above parameters on startup. 
@@ -172,6 +172,8 @@ $$θ = \min\{\theta_{\text{offset}} \cdot D + (180 - \theta_{\text{offset}}) \cd
 # About
 
 This project was first developed for the `EN2853 - Embedded Systems & Applications` module in Semester 4, University of Moratuwa, Department of Electrical Engineering.
+
+
 [go to the top](#Smart-Medibox)
 
 
